@@ -13,15 +13,26 @@ repositories {
 	maven { url 'https://repo.spring.io/milestone' }
 }
 
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'pl.poloch.imgfighter.ImgFighterApplication'
+		)
+	}
+}
+
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	runtimeOnly 'io.r2dbc:r2dbc-postgresql'
+
 	runtimeOnly 'org.postgresql:postgresql'
+
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'io.projectreactor:reactor-test'
+
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.12.Final'
 }
 
 test {
