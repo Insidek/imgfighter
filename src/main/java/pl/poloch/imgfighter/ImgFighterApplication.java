@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class ImgfighterApplication {
+public class ImgFighterApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(ImgfighterApplication.class, args);
+        SpringApplication.run(ImgFighterApplication.class, args);
 
     }
 
