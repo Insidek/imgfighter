@@ -36,10 +36,6 @@ public class UserModel extends TimeStamp{
     public UserModel() {
     }
 
-    public UserModel(String nickname) {
-        super();
-    }
-
     public long getId() {
         return id;
     }

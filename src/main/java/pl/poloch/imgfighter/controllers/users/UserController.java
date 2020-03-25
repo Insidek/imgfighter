@@ -17,7 +17,7 @@ public class UserController extends TimeStamp {
     private String name;
     private String surname;
 
-    public boolean requiredFieldsNotNull() {
+    public Boolean requiredFieldsNotNull() {
         if (nickname.isEmpty()) { return false; }
         else if (password.isEmpty()) { return false; }
         else if (email.isEmpty()) { return false; }
