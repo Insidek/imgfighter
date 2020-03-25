@@ -1,21 +1,42 @@
 package pl.poloch.imgfighter.controllers.users;
 
-
+import com.google.common.hash.Hashing;
 import pl.poloch.imgfighter.database_models.TimeStamp;
-import pl.poloch.imgfighter.database_models.UserModel;
+import pl.poloch.imgfighter.repositories.UserRepository;
+
+import java.nio.charset.StandardCharsets;
 
 
 public class UserController extends TimeStamp {
 
+
     private long id;
-    private String nickname;
-    private String password;
-    private String email;
+    private String nickname = "";
+    private String password = "";
+    private String email = "";
     private String name;
     private String surname;
 
-    public void addUser(UserModel userModel) {
+    public boolean requiredFieldsNotNull() {
+        if (nickname.isEmpty()) { return false; }
+        else if (password.isEmpty()) { return false; }
+        else if (email.isEmpty()) { return false; }
+        else { return true; }
     }
+
+    public Boolean nicknameAndEmailExist(UserRepository repository){
+        if (repository.findByNickname(nickname).size() > 0) { return true; }
+        else if (repository.findByEmail(email).size() > 0) { return true; }
+        else { return false; }
+    }
+
+    public void hashPassword() {
+        String sha256hex = Hashing.sha256()
+                .hashString(password, StandardCharsets.UTF_8)
+                .toString();
+        password = sha256hex;
+    }
+
 
     public long getId() {
         return id;

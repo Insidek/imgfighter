@@ -33,6 +33,10 @@ dependencies {
 	testImplementation 'io.projectreactor:reactor-test'
 
 	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.12.Final'
+
+	implementation 'com.google.guava:guava:28.2-jre'
+
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
 }
 
 test {

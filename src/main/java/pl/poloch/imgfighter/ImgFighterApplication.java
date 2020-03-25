@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 public class ImgFighterApplication {
 
-
     public static void main(String[] args) {
         SpringApplication.run(ImgFighterApplication.class, args);
 
