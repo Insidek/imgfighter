@@ -25,11 +25,15 @@ public class UserPublic {
 
     @PostMapping(value="/api/public/register", consumes = "application/json", produces = "application/json")
     public ResponseEntity<String> register(@RequestBody UserController userController) {
-        if (userController.nicknameAndEmailExist(repository)) { return JsonHTTPCode.BAD_REQUEST_USER_EMAIL_OR_NICKNAME_EXIST; }
+        if (userController.nicknameAndEmailExist(repository)) {
+            return JsonHTTPCode.BAD_REQUEST_USER_EMAIL_OR_NICKNAME_EXIST;
+        }
         else if (userController.requiredFieldsNotNull()) {
                 userController.hashPassword();
                 repository.save(new UserModel(userController.getNickname(), userController.getPassword(), userController.getEmail(), userController.getName(), userController.getSurname()));
                 return JsonHTTPCode.CREATED;
-        } else { return JsonHTTPCode.BAD_REQUEST_USER_REQUIRE_FIELDS; }
+        } else {
+            return JsonHTTPCode.BAD_REQUEST_USER_REQUIRE_FIELDS;
+        }
     }
 }
