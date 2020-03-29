@@ -1,14 +1,15 @@
 package pl.poloch.imgfighter.controllers.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.hash.Hashing;
+import org.apache.commons.lang3.StringUtils;
 import pl.poloch.imgfighter.database_models.TimeStamp;
 import pl.poloch.imgfighter.repositories.UserRepository;
 
 import java.nio.charset.StandardCharsets;
 
-
 public class UserController extends TimeStamp {
-
 
     private long id;
     private String nickname = "";
@@ -17,24 +18,25 @@ public class UserController extends TimeStamp {
     private String name;
     private String surname;
 
-    public Boolean requiredFieldsNotNull() {
-        if (nickname.isEmpty()) { return false; }
-        else if (password.isEmpty()) { return false; }
-        else if (email.isEmpty()) { return false; }
-        else { return true; }
-    }
 
     public Boolean nicknameAndEmailExist(UserRepository repository){
-        if (repository.findByNickname(nickname).size() > 0) { return true; }
-        else if (repository.findByEmail(email).size() > 0) { return true; }
-        else { return false; }
+        return ((repository.findByEmail(email).size() > 0) || (repository.findByNickname(nickname).size() > 0));
     }
 
     public void hashPassword() {
-        String sha256hex = Hashing.sha256()
-                .hashString(password, StandardCharsets.UTF_8)
-                .toString();
-        password = sha256hex;
+        password =  Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+    }
+
+    public Boolean isNickname() {
+        return !(StringUtils.isBlank(nickname));
+    }
+
+    public Boolean isEmail() {
+        return !(StringUtils.isBlank(email));
+    }
+
+    public Boolean isPassword() {
+        return !(StringUtils.isBlank(password));
     }
 
 
@@ -85,4 +87,5 @@ public class UserController extends TimeStamp {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
 }
