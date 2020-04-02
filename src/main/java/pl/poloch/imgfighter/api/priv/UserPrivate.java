@@ -13,8 +13,8 @@ public class UserPrivate {
 
     @GetMapping(value="/api/private/time")
     public TimeController getTime(@RequestHeader("Authorization") String token) {
-        token = token.replace("Bearer ", "");
-        JWTController.decodeJWT(token);
+        JWTController.verifyJWTToken(token);
+
         return new TimeController();
     }
 

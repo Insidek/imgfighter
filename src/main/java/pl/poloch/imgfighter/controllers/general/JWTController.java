@@ -56,4 +56,8 @@ public class JWTController {
                 .parseClaimsJws(jwt).getBody();
         return claims;
     }
+
+    public static void verifyJWTToken(String token){
+        JWTController.decodeJWT(token.replace("Bearer ", ""));
+    }
 }
