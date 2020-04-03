@@ -11,7 +11,6 @@ public class ServerTime {
 
     @GetMapping(value="/api/public/time")
     public TimeController getServerTime() {
-        System.out.println(ImgFighterApplication.imagesDirectory);
         return new TimeController();
     }
 }

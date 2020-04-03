@@ -1,18 +1,18 @@
 package pl.poloch.imgfighter.controllers.images;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.http.*;
 import pl.poloch.imgfighter.ImgFighterApplication;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.time.LocalDateTime;
 
 public class ImagesController {
-    public static String  downloadImages(String url) throws IOException {
-        String imagesPath = ImgFighterApplication.imagesDirectory + FilenameUtils.getName(url) + System.currentTimeMillis();
+    public static String downloadImage(String url) throws IOException {
+        String imagesPath = ImgFighterApplication.imagesDirectory + System.currentTimeMillis() + FilenameUtils.getName(url);
         URL urlToDownload = new URL(url);
         ReadableByteChannel rbc = Channels.newChannel(urlToDownload.openStream());
         FileOutputStream fos = new FileOutputStream(imagesPath);
@@ -20,5 +20,17 @@ public class ImagesController {
         fos.close();
         rbc.close();
         return imagesPath;
+    }
+
+    public static ResponseEntity<byte[]> uploadImage(String convertedFilePath) throws IOException {
+        HttpHeaders headers = new HttpHeaders();
+        FileInputStream in = new FileInputStream(convertedFilePath);
+        byte[] media = IOUtils.toByteArray(in);
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+
+        in.close();
+
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(media, headers, HttpStatus.OK);
+        return responseEntity;
     }
 }

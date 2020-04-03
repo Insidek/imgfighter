@@ -3,11 +3,13 @@ package pl.poloch.imgfighter.controllers.general;
 import org.springframework.http.ResponseEntity;
 import pl.poloch.imgfighter.controllers.users.UserAuth;
 
+import java.io.Serializable;
+
 public class JsonHTTPCode {
 
     /* HTTP CODE 200 - OK */
 
-    public static ResponseEntity<UserAuth> OK_BODY(UserAuth json){
+    public static ResponseEntity<? extends Serializable> OK_BODY(Serializable json){
         return ResponseEntity.status(200).body(json);
     }
 

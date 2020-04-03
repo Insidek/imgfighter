@@ -1,6 +1,8 @@
 package pl.poloch.imgfighter.api.pub;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +21,7 @@ import java.io.Serializable;
 @RestController
 public class UserPublic {
 
+    Logger logger = LoggerFactory.getLogger(UserPublic.class);
 
     @Autowired
     UserRepository repository;
@@ -31,6 +34,7 @@ public class UserPublic {
         else if (userController.isNickname() && userController.isEmail() && userController.isPassword()) {
                 userController.hashPassword();
                 repository.save(new UserModel(userController.getNickname(), userController.getPassword(), userController.getEmail(), userController.getName(), userController.getSurname()));
+                logger.info("User with the nickname: " + userController.getNickname() + " has been created!");
                 return JsonHTTPCode.CREATED;
         } else {
             return JsonHTTPCode.BAD_REQUEST_USER_REQUIRE_FIELDS;
@@ -47,6 +51,7 @@ public class UserPublic {
         }
         if (userAuth.verifyPassword(repository)) {
             userAuth.setToken(JWTController.createJWT(userAuth.getNickname()));
+            logger.info("User with the nickname: " + userAuth.getNickname() + " has been authorized!");
             return JsonHTTPCode.OK_BODY(userAuth);
         } else {
             return JsonHTTPCode.BAD_REQUEST_USER_WRONG_PASSWORD;
