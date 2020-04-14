@@ -1,4 +1,4 @@
-package pl.poloch.imgfighter.controllers.users;
+package pl.poloch.imgfighter.services.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.hash.Hashing;

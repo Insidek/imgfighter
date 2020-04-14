@@ -1,7 +1,6 @@
-package pl.poloch.imgfighter.controllers.general;
+package pl.poloch.imgfighter.services.general;
 
 import org.springframework.http.ResponseEntity;
-import pl.poloch.imgfighter.controllers.users.UserAuth;
 
 import java.io.Serializable;
 

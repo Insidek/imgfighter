@@ -1,4 +1,4 @@
-package pl.poloch.imgfighter.api.pub;
+package pl.poloch.imgfighter.controllers.api.pub;
 
 
 import org.slf4j.Logger;
@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import pl.poloch.imgfighter.controllers.general.JWTController;
-import pl.poloch.imgfighter.controllers.general.JsonHTTPCode;
-import pl.poloch.imgfighter.controllers.users.UserController;
-import pl.poloch.imgfighter.controllers.users.UserAuth;
+import pl.poloch.imgfighter.services.general.JWTController;
+import pl.poloch.imgfighter.services.general.JsonHTTPCode;
+import pl.poloch.imgfighter.services.users.UserController;
+import pl.poloch.imgfighter.services.users.UserAuth;
 import pl.poloch.imgfighter.database_models.UserModel;
 import pl.poloch.imgfighter.repositories.UserRepository;
 

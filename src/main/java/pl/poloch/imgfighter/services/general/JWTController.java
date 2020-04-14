@@ -1,4 +1,4 @@
-package pl.poloch.imgfighter.controllers.general;
+package pl.poloch.imgfighter.services.general;
 
 
 

@@ -1,4 +1,4 @@
-package pl.poloch.imgfighter.controllers.images;
+package pl.poloch.imgfighter.services.images;
 
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;

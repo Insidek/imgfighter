@@ -14,7 +14,7 @@ import java.util.Date;
         value = {"createdAt", "updatedAt"},
         allowGetters = true
 )
-public abstract class TimeStamp implements Serializable {
+public abstract class StandardModel implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     @CreatedDate

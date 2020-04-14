@@ -1,13 +1,13 @@
-package pl.poloch.imgfighter.api.priv;
+package pl.poloch.imgfighter.controllers.api.priv;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.poloch.imgfighter.controllers.general.JWTController;
-import pl.poloch.imgfighter.controllers.images.CompressImagesController;
-import pl.poloch.imgfighter.controllers.images.ImagesController;
+import pl.poloch.imgfighter.services.general.JWTController;
+import pl.poloch.imgfighter.services.images.CompressImagesController;
+import pl.poloch.imgfighter.services.images.ImagesController;
 
 import java.io.IOException;
 

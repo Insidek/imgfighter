@@ -1,15 +1,13 @@
-package pl.poloch.imgfighter.controllers.users;
+package pl.poloch.imgfighter.services.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.hash.Hashing;
 import org.apache.commons.lang3.StringUtils;
-import pl.poloch.imgfighter.database_models.TimeStamp;
+import pl.poloch.imgfighter.database_models.StandardModel;
 import pl.poloch.imgfighter.repositories.UserRepository;
 
 import java.nio.charset.StandardCharsets;
 
-public class UserController extends TimeStamp {
+public class UserController extends StandardModel {
 
     private long id;
     private String nickname = "";
@@ -38,7 +36,6 @@ public class UserController extends TimeStamp {
     public Boolean isPassword() {
         return !(StringUtils.isBlank(password));
     }
-
 
     public long getId() {
         return id;

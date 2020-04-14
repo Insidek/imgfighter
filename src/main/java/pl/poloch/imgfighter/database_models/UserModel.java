@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class UserModel extends TimeStamp{
+public class UserModel extends StandardModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
