@@ -44,7 +44,7 @@ public class UserService {
         if (!(isBlank(userAuthRequest.getNickname()) && isBlank(userAuthRequest.getPassword()))) {
             return JsonHTTPCode.BAD_REQUEST_USER_REQUIRE_NICKNAME_AND_PASSWORD;
         }
-        if (!(existUser(repository, userAuthRequest))) {
+        if (!(existUser(userAuthRequest))) {
             return JsonHTTPCode.BAD_REQUEST_USER_USER_NOT_EXIST;
         }
         if (verifyPassword(repository, userAuthRequest)) {
@@ -65,7 +65,7 @@ public class UserService {
         return Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
     }
 
-    private Boolean existUser(UserRepository repository, UserAuthRequest userAuthRequest) {
+    private Boolean existUser(UserAuthRequest userAuthRequest) {
         return (repository.findByNickname(userAuthRequest.getNickname()).size() > 0);
     }
 
