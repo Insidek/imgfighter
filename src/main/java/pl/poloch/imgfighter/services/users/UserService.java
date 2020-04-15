@@ -47,7 +47,7 @@ public class UserService {
         if (!(existUser(userAuthRequest))) {
             return JsonHTTPCode.BAD_REQUEST_USER_USER_NOT_EXIST;
         }
-        if (verifyPassword(repository, userAuthRequest)) {
+        if (verifyPassword(userAuthRequest)) {
             UserAuthResponse userAuthResponse = new UserAuthResponse();
             userAuthResponse.setToken(JWTController.createJWT(userAuthRequest.getNickname()));
             logger.info("User with the nickname: " + userAuthRequest.getNickname() + " has been authorized!");
@@ -69,7 +69,7 @@ public class UserService {
         return (repository.findByNickname(userAuthRequest.getNickname()).size() > 0);
     }
 
-    public Boolean verifyPassword(UserRepository repository, UserAuthRequest userAuthRequest) {
+    private Boolean verifyPassword(UserAuthRequest userAuthRequest) {
         return (repository.findByNickname(userAuthRequest.getNickname()).get(0).getPassword().equals(hashPassword(userAuthRequest.getPassword())));
     }
 
