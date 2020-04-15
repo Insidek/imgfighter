@@ -1,8 +1,8 @@
 package pl.poloch.imgfighter.dto.user;
 
 public class UserAuthRequest {
-    private String nickname = "";
-    private String password = "";
+    private String nickname;
+    private String password;
 
     public String getNickname() {
         return nickname;

@@ -17,7 +17,7 @@ import pl.poloch.imgfighter.services.general.JsonHTTPCode;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
-import static org.apache.logging.log4j.util.Strings.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 
 @Service
@@ -31,7 +31,7 @@ public class UserService {
         if (nicknameAndEmailExist(repository, userRegisterRequest)) {
             return JsonHTTPCode.BAD_REQUEST_USER_EMAIL_OR_NICKNAME_EXIST;
         }
-        else if (!(isBlank(userRegisterRequest.getNickname()) && isBlank(userRegisterRequest.getEmail()) && isBlank(userRegisterRequest.getPassword()))) {
+        else if (isNotBlank(userRegisterRequest.getNickname()) && isNotBlank(userRegisterRequest.getEmail()) && isNotBlank(userRegisterRequest.getPassword())) {
             repository.save(new UserModel(userRegisterRequest.getNickname(), hashPassword(userRegisterRequest.getPassword()), userRegisterRequest.getEmail(), userRegisterRequest.getName(), userRegisterRequest.getSurname()));
             logger.info("User with the nickname: " + userRegisterRequest.getNickname() + " has been created!");
             return JsonHTTPCode.CREATED;
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     public ResponseEntity<? extends Serializable> auth(UserAuthRequest userAuthRequest) {
-        if (!(isBlank(userAuthRequest.getNickname()) && isBlank(userAuthRequest.getPassword()))) {
+        if (isNotBlank(userAuthRequest.getNickname()) && isNotBlank(userAuthRequest.getPassword())) {
             return JsonHTTPCode.BAD_REQUEST_USER_REQUIRE_NICKNAME_AND_PASSWORD;
         }
         if (!(existUser(userAuthRequest))) {

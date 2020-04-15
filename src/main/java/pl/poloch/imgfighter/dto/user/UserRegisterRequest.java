@@ -2,9 +2,9 @@ package pl.poloch.imgfighter.dto.user;
 
 public class UserRegisterRequest {
     private long id;
-    private String nickname = "";
-    private String password = "";
-    private String email = "";
+    private String nickname;
+    private String password;
+    private String email;
     private String name;
     private String surname;
 
