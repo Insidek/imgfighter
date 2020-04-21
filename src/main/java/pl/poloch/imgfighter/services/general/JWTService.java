@@ -13,7 +13,7 @@ import java.security.Key;
 import java.util.Date;
 
 
-public class JWTController {
+public class JWTService {
 
     // 6h
     private static long ttlMillis = 21600000;
@@ -58,6 +58,6 @@ public class JWTController {
     }
 
     public static void verifyJWTToken(String token){
-        JWTController.decodeJWT(token.replace("Bearer ", ""));
+        JWTService.decodeJWT(token.replace("Bearer ", ""));
     }
 }

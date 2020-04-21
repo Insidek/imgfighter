@@ -11,7 +11,7 @@ import pl.poloch.imgfighter.dto.user.UserAuthRequest;
 import pl.poloch.imgfighter.dto.user.UserAuthResponse;
 import pl.poloch.imgfighter.dto.user.UserRegisterRequest;
 import pl.poloch.imgfighter.repositories.UserRepository;
-import pl.poloch.imgfighter.services.general.JWTController;
+import pl.poloch.imgfighter.services.general.JWTService;
 import pl.poloch.imgfighter.services.general.JsonHTTPCode;
 
 import java.io.Serializable;
@@ -22,6 +22,7 @@ import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Service
 public class UserService {
+
     @Autowired
     UserRepository repository;
 
@@ -49,7 +50,7 @@ public class UserService {
         }
         if (verifyPassword(userAuthRequest)) {
             UserAuthResponse userAuthResponse = new UserAuthResponse();
-            userAuthResponse.setToken(JWTController.createJWT(userAuthRequest.getNickname()));
+            userAuthResponse.setToken(JWTService.createJWT(userAuthRequest.getNickname()));
             logger.info("User with the nickname: " + userAuthRequest.getNickname() + " has been authorized!");
             return JsonHTTPCode.OK_BODY(userAuthResponse);
         } else {

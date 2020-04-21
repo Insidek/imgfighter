@@ -3,6 +3,7 @@ package pl.poloch.imgfighter.services.images;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.*;
+import org.springframework.stereotype.Service;
 import pl.poloch.imgfighter.ImgFighterApplication;
 
 import java.io.*;
@@ -10,7 +11,8 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 
-public class ImagesController {
+@Service
+public class ImagesService {
     public static String downloadImage(String url) throws IOException {
         String imagesPath = ImgFighterApplication.imagesDirectory + System.currentTimeMillis() + FilenameUtils.getName(url);
         URL urlToDownload = new URL(url);
