@@ -12,7 +12,7 @@ import pl.poloch.imgfighter.dto.user.UserAuthResponse;
 import pl.poloch.imgfighter.dto.user.UserRegisterRequest;
 import pl.poloch.imgfighter.repositories.UserRepository;
 import pl.poloch.imgfighter.services.general.JWTService;
-import pl.poloch.imgfighter.services.general.JsonHTTPCode;
+import pl.poloch.imgfighter.services.general.JsonHTTPCodeService;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -30,31 +30,31 @@ public class UserService {
 
     public ResponseEntity<String> register(UserRegisterRequest userRegisterRequest) {
         if (nicknameAndEmailExist(repository, userRegisterRequest)) {
-            return JsonHTTPCode.BAD_REQUEST_USER_EMAIL_OR_NICKNAME_EXIST;
+            return JsonHTTPCodeService.BAD_REQUEST_USER_EMAIL_OR_NICKNAME_EXIST;
         }
         else if (isNotBlank(userRegisterRequest.getNickname()) && isNotBlank(userRegisterRequest.getEmail()) && isNotBlank(userRegisterRequest.getPassword())) {
             repository.save(new UserModel(userRegisterRequest.getNickname(), hashPassword(userRegisterRequest.getPassword()), userRegisterRequest.getEmail(), userRegisterRequest.getName(), userRegisterRequest.getSurname()));
             logger.info("User with the nickname: " + userRegisterRequest.getNickname() + " has been created!");
-            return JsonHTTPCode.CREATED;
+            return JsonHTTPCodeService.CREATED;
         } else {
-            return JsonHTTPCode.BAD_REQUEST_USER_REQUIRE_FIELDS;
+            return JsonHTTPCodeService.BAD_REQUEST_USER_REQUIRE_FIELDS;
         }
     }
 
     public ResponseEntity<? extends Serializable> auth(UserAuthRequest userAuthRequest) {
         if (isNotBlank(userAuthRequest.getNickname()) && isNotBlank(userAuthRequest.getPassword())) {
-            return JsonHTTPCode.BAD_REQUEST_USER_REQUIRE_NICKNAME_AND_PASSWORD;
+            return JsonHTTPCodeService.BAD_REQUEST_USER_REQUIRE_NICKNAME_AND_PASSWORD;
         }
         if (!(existUser(userAuthRequest))) {
-            return JsonHTTPCode.BAD_REQUEST_USER_USER_NOT_EXIST;
+            return JsonHTTPCodeService.BAD_REQUEST_USER_USER_NOT_EXIST;
         }
         if (verifyPassword(userAuthRequest)) {
             UserAuthResponse userAuthResponse = new UserAuthResponse();
             userAuthResponse.setToken(JWTService.createJWT(userAuthRequest.getNickname()));
             logger.info("User with the nickname: " + userAuthRequest.getNickname() + " has been authorized!");
-            return JsonHTTPCode.OK_BODY(userAuthResponse);
+            return JsonHTTPCodeService.OK_BODY(userAuthResponse);
         } else {
-            return JsonHTTPCode.BAD_REQUEST_USER_WRONG_PASSWORD;
+            return JsonHTTPCodeService.BAD_REQUEST_USER_WRONG_PASSWORD;
         }
     }
 

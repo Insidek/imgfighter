@@ -1,10 +1,12 @@
 package pl.poloch.imgfighter.services.general;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 
-public class JsonHTTPCode {
+@Service
+public class JsonHTTPCodeService {
 
     /* HTTP CODE 200 - OK */
 

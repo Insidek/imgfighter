@@ -12,12 +12,12 @@ import java.util.Date;
 
 @Configuration
 @EnableScheduling
-public class ImagesCleaner {
+public class ImagesCleanerSchedule {
 
     Integer hours = 2;
-    long daysToMillis = new Date().getTime() - hours * 1 * 60 * 60 * 1000;
+    long daysToMillis = new Date().getTime() - hours * 60 * 60 * 1000;
 
-    Logger logger = LoggerFactory.getLogger(ImagesCleaner.class);
+    Logger logger = LoggerFactory.getLogger(ImagesCleanerSchedule.class);
 
     @Scheduled(fixedDelay = 600000)
     public void deleteFilesOlderThanNDays() {
@@ -27,7 +27,7 @@ public class ImagesCleaner {
         if (toAnilhilation.isDirectory()) {
             for (File f : toAnilhilation.listFiles()) {
                 long diff = new Date().getTime() - f.lastModified();
-                if (diff > hours * 24 * 60 * 60 * 1000) {
+                if (diff > hours * 60 * 60 * 1000) {
                     f.delete();
                     logger.info("Annihilated: " + f.getAbsolutePath());
                 }
