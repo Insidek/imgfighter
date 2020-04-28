@@ -17,7 +17,7 @@ public class ConvertImagesController {
     ConvertImagesService convertImagesService;
 
     @GetMapping(value="/api/private/img/convert", produces = "image/png")
-    public ResponseEntity<byte[]> convert(@RequestHeader("Authorization")String token,ConvertImagesRequest convertImagesRequest) throws IllegalAccessException, NoSuchFieldException, IOException {
+    public ResponseEntity<byte[]> convert(@RequestHeader("Authorization") String token, ConvertImagesRequest convertImagesRequest) throws IllegalAccessException, NoSuchFieldException, IOException {
         JWTService.verifyJWTToken(token);
 
         return convertImagesService.convert(convertImagesRequest);

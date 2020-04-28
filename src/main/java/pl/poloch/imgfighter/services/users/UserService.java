@@ -17,6 +17,7 @@ import pl.poloch.imgfighter.services.general.JsonHTTPCodeService;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 
@@ -42,7 +43,7 @@ public class UserService {
     }
 
     public ResponseEntity<? extends Serializable> auth(UserAuthRequest userAuthRequest) {
-        if (isNotBlank(userAuthRequest.getNickname()) && isNotBlank(userAuthRequest.getPassword())) {
+        if (isBlank(userAuthRequest.getNickname()) && isBlank(userAuthRequest.getPassword())) {
             return JsonHTTPCodeService.BAD_REQUEST_USER_REQUIRE_NICKNAME_AND_PASSWORD;
         }
         if (!(existUser(userAuthRequest))) {
